@@ -148,6 +148,7 @@
 			this.MainButton.TabIndex = 6;
 			this.MainButton.Text = "Посчитать";
 			this.MainButton.UseVisualStyleBackColor = true;
+			this.MainButton.Click += new System.EventHandler(this.MainButton_Click_1);
 			// 
 			// Form1
 			// 
