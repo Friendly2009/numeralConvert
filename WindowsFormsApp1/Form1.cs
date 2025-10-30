@@ -1,14 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using System.Windows.Forms;
-
 namespace WindowsFormsApp1
 {
 	public partial class Form1 : Form
@@ -17,39 +8,41 @@ namespace WindowsFormsApp1
 		{
 			InitializeComponent();
 		}
-
 		private void MainButton_Click(object sender, EventArgs e)
 		{
-
-		}
-		public static List<int> ConvertToList(int number)
-		{
-			var digits = new List<int>();
-			string numberStr = number.ToString();
-
-			foreach (char c in numberStr)
+			if (ChooseFirst.Text != "" && ChooseLast.Text != "")
 			{
-				digits.Add(c - '0');
+				try
+				{
+					string num = input.Text;
+					int first = int.Parse(ChooseFirst.Text);
+					int last = int.Parse(ChooseLast.Text);
+					var objec = Converter.ConvertToList(num.ToString());
+					for (int i = 0; i < objec.Count; i++)
+					{
+						if (objec[i] >= first)
+						{
+							result.Text = "введите число, входящее в систему счисления";
+							MessageBox.Show("введите число, входящее в систему счисления");
+							return;
+						}
+					}
+					if (first != last)
+					{
+						result.Text = Converter.ConvertBase(num.ToString(), first, last);
+					}
+					else
+					{
+						result.Text = "введите разные значения системы счислений";
+						MessageBox.Show("введите разные значения системы счислений");
+					}
+				}
+				catch
+				{
+					result.Text = "введите целое число";
+					MessageBox.Show("введите целое число");
+				}
 			}
-			return digits;
-		}
-		static string ConvertToBase(int number, int radix)
-		{
-			const string chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-			if (radix < 2 || radix > chars.Length)
-			{
-				MessageBox.Show("максимум было 16");
-			}
-			if (number == 0) { return "0"; }
-			string result = "";
-			int current = number;
-			while (current > 0)
-			{
-				int remainder = current % radix;
-				result = chars[remainder] + result;
-				current /= radix;
-			}
-			return result;
 		}
 	}
 }
