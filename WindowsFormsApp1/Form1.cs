@@ -31,7 +31,7 @@ namespace WindowsFormsApp1
 					}
 					if (first != last)
 					{
-						result.Text = Converter.ConvertBase(num.ToString(), first, last);
+						result.Text = Converter.ConvertBase(num, first, last);
 					}
 					else
 					{
